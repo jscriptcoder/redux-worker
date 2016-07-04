@@ -1,0 +1,20 @@
+.tiles-grid {
+
+	.actions {
+
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		border: 1px solid darkgrey;
+		border-radius: 5px;
+		padding: 10px;
+		background-color: rgba(255, 255, 255, 0.4);
+		z-index: 2;
+
+		button {}
+
+		input { width: 60px; }
+
+	}
+
+}
