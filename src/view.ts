@@ -1,5 +1,5 @@
 import { appStore } from './store'
-import { serviceAmount } from './backend'
+import serviceWorker from './worker/service';
 import { TileModel, tileId2Subscription } from './models/tile'
 import * as actions from './actions'
 import TilesGrid from './components/tiles-grid'
@@ -16,17 +16,14 @@ export const addTile = (tile: TileModel) => {
 	console.log('Added new tile:', tile);
 
 	tilesGrid.addTile(tile);
-	tileId2Subscription[tile.id] = serviceAmount.subscribe((amount: number) => {
-		appStore.dispatch(actions.updateTileAmount(tile.id, amount));
-	});
+	serviceWorker.subscribeServiceAmount(tile.id);
 }
 
-export const removeTile = (tile: TileModel) => {
-	console.log('Tile removed:', tile);
+export const removeTile = (tileId: number) => {
+	console.log('Tile removed with id:', tileId);
 
-	tilesGrid.removeTile(tile.id);
-	tileId2Subscription[tile.id].unsubscribe();
-	delete tileId2Subscription[tile.id];
+	tilesGrid.removeTile(tileId);
+	serviceWorker.unsubscribeServiceAmount(tileId);
 }
 
 export const updateTile = (newTile: TileModel, oldTile: TileModel) => {
