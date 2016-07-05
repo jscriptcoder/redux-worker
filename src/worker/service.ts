@@ -28,6 +28,18 @@ class ServiceWorker extends Worker {
 		this.postMessage(unsubscribeServiceAmountMsg(tileId));
 	}
 
+	public addTiles(howMany: number): void {
+		this.postMessage();
+	}
+
+	public removeTile(tileId: number): void {
+		this.postMessage();
+	}
+
+	public updateTileThreshold(tileId: number, threshold: number): void {
+		this.postMessage();
+	}
+
 	// must be implemented outside
 	public onnewtiles(tiles: TileModel[]): void { }
 	public onremovetile(tileId: number): void { }
