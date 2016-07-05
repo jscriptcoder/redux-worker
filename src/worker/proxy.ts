@@ -1,6 +1,3 @@
-import { appStore, AppStoreListener, TilesGridState } from './store'
-import { TileModel } from './models/tile'
-
 export default class WorkerProxy extends Worker {
 
 	constructor(url: string) {

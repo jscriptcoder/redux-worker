@@ -1,5 +1,6 @@
 import { appStore, TilesGridState } from '../store'
 import { TileModel } from '../models/tile'
+import { MESSAGES, newTilesMsg, removeTileMsg, updateTileMsg } from './messages'
 
 class StressedWorker {
 
@@ -13,13 +14,7 @@ class StressedWorker {
 	private onmessage(event: MessageEvent): void {
 
 		switch (event.data.message) {
-			case 'SUBSCRIBE_STORE':
-				break;
-			case 'STATE_HAS_CHANGED':
-				break;
-			case 'STATE_HAS_NEW_ITEM':
-				break;
-			case 'STATE_HAS_DELETED_ITEM':
+			case MESSAGES.SUBSCRIBE_STORE:
 				break;
 			default:
 				break;
@@ -38,14 +33,12 @@ class StressedWorker {
 					const sliceIdx = newState.length - howMany;
 					const newTiles = newState.slice(sliceIdx);
 
-					//for(let tile of newTiles) view.addTile(tile);
-					this.postMessage();
+					this.postMessage(newTilesMsg(newTiles), null);
 
 				} else if (appStore.isItemDeleted()) {
 
 					const oldTile = oldState.find((tile: TileModel) => newState.indexOf(tile) === -1);
-					//view.removeTile(oldTile);
-					this.postMessage();
+					this.postMessage(removeTileMsg(oldTile.id), null);
 
 				} else {
 
@@ -55,8 +48,7 @@ class StressedWorker {
 						return tile !== oldTile;
 					});
 
-					//view.updateTile(newTile, oldTile);
-					this.postMessage();
+					this.postMessage(updateTileMsg(newTile, oldTile), null);
 				}
 			}
 		});
