@@ -1,9 +1,9 @@
 export enum ACTIONS {
-    ADD_TILE,
-    ADD_TILES,
-    REMOVE_TILE,
-    UPDATE_TILE_AMOUNT,
-    UPDATE_TILE_THRESHOLD
+    ADD_TILE = 0,
+    ADD_TILES = 1,
+    REMOVE_TILE = 2,
+    UPDATE_TILE_AMOUNT = 3,
+    UPDATE_TILE_THRESHOLD = 4
 }
 
 interface Action { type: ACTIONS }

@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "postinstall": "typings install",
-    "start": "webpack-dev-server --inline"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -18,15 +18,15 @@
   },
   "homepage": "https://github.com/jscriptcoder/redux-worker#readme",
   "devDependencies": {
-    "typescript": "1.8.10",
-    "typings": "1.0.4",
-    "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1",
-    "ts-loader": "0.8.2",
     "css-loader": "0.23.1",
+    "live-server": "1.0.0",
     "node-sass": "3.7.0",
     "sass-loader": "3.2.0",
-    "style-loader": "0.13.1"
+    "style-loader": "0.13.1",
+    "ts-loader": "0.8.2",
+    "typescript": "1.8.10",
+    "typings": "1.0.4",
+    "webpack": "1.13.1"
   },
   "dependencies": {
     "es6-shim": "0.35.1",

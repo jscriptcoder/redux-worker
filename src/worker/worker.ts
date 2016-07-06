@@ -9,20 +9,19 @@ import {
 	removeTileMsg, 
 	updateTileMsg } from './messages'
 
+// TODO: merge messages and actions
+import {
+	ACTIONS, 
+	ActionTilesGrid, 
+	addTiles, 
+	removeTile,
+	updateTileThreshold } from '../actions'
+
 class StressedWorker {
 
-	private postMessage: typeof postMessage;
-
-	constructor() {
-		// hooks up global methods
-		this.postMessage = postMessage;
-		onmessage = this.onmessage.bind(this);
-	}
-
-	private onmessage(event: MessageEvent): void {
+	public onmessage(event: MessageEvent): void {
 
 		const message: MessageWorker = event.data;
-
 		switch (message.type) {
 			case MESSAGES.SUBSCRIBE_STORE:
 				this.subscribeStore();
@@ -35,10 +34,16 @@ class StressedWorker {
 			case MESSAGES.UNSUBSCRIBE_SERVICE_AMOUNT:
 				this.unsubscribeServiceAmount(message.id);
 				break;
+		}
 
-			default:
+		const action: ActionTilesGrid = event.data;
+		switch (action.type) {
+			case ACTIONS.ADD_TILES:
+			case ACTIONS.REMOVE_TILE:
+			case ACTIONS.UPDATE_TILE_THRESHOLD:
+				appStore.dispatch(action);
 				break;
-		}	
+		}
 
 	}
 
@@ -53,12 +58,12 @@ class StressedWorker {
 					const sliceIdx = newState.length - howMany;
 					const newTiles = newState.slice(sliceIdx);
 
-					this.postMessage(newTilesMsg(newTiles), null);
+					postMessage(newTilesMsg(newTiles), null);
 
 				} else if (appStore.isItemDeleted()) {
 
 					const oldTile = oldState.find((tile: TileModel) => newState.indexOf(tile) === -1);
-					this.postMessage(removeTileMsg(oldTile.id), null);
+					postMessage(removeTileMsg(oldTile.id), null);
 
 				} else {
 
@@ -68,7 +73,7 @@ class StressedWorker {
 						return tile !== oldTile;
 					});
 
-					this.postMessage(updateTileMsg(newTile, oldTile), null);
+					postMessage(updateTileMsg(newTile, oldTile), null);
 				}
 			}
 		});
@@ -87,4 +92,5 @@ class StressedWorker {
 
 }
 
-new StressedWorker();
+const stressedWorker = new StressedWorker();
+onmessage = (event: MessageEvent) => stressedWorker.onmessage(event);

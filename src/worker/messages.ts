@@ -2,12 +2,12 @@ import { TileModel } from '../models/tile'
 
 // similar to actions. Maybe we should combine them?
 export enum MESSAGES {
-    SUBSCRIBE_STORE,
-    SUBSCRIBE_SERVICE_AMOUNT,
-    UNSUBSCRIBE_SERVICE_AMOUNT,
-    NEW_TILES,
-    REMOVE_TILE,
-    UPDATE_TILE
+    SUBSCRIBE_STORE = 100,
+    SUBSCRIBE_SERVICE_AMOUNT = 101,
+    UNSUBSCRIBE_SERVICE_AMOUNT = 102,
+    NEW_TILES = 103,
+    REMOVE_TILE = 104,
+    UPDATE_TILE = 105
 }
 
 interface Message { type: MESSAGES }

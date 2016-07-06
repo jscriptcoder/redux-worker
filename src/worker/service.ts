@@ -9,35 +9,43 @@ import {
 	removeTileMsg, 
 	updateTileMsg } from './messages'
 
-class ServiceWorker extends Worker {
+// borrows some actions. We should definitely merge messages and actions
+import {
+	addTiles, 
+	removeTile, 
+	updateTileThreshold } from '../actions'
+
+class ServiceWorker {
+
+	private worker: Worker;
 
 	constructor(url: string) {
-		super(url);
-		this.onmessage = this.messageHandler.bind(this);
+		this.worker = new Worker(url);
+		this.worker.onmessage = this.messageHandler.bind(this);
 	}
 
 	public subscribeStore(): void {
-		this.postMessage(subscribeStoreMsg());
+		this.worker.postMessage(subscribeStoreMsg());
 	}
 
 	public subscribeServiceAmount(tileId: number): void {
-		this.postMessage(subscribeServiceAmountMsg(tileId));
+		this.worker.postMessage(subscribeServiceAmountMsg(tileId));
 	}
 
 	public unsubscribeServiceAmount(tileId: number): void {
-		this.postMessage(unsubscribeServiceAmountMsg(tileId));
+		this.worker.postMessage(unsubscribeServiceAmountMsg(tileId));
 	}
 
 	public addTiles(howMany: number): void {
-		this.postMessage();
+		this.worker.postMessage(addTiles(howMany));
 	}
 
 	public removeTile(tileId: number): void {
-		this.postMessage();
+		this.worker.postMessage(removeTile(tileId));
 	}
 
 	public updateTileThreshold(tileId: number, threshold: number): void {
-		this.postMessage();
+		this.worker.postMessage(updateTileThreshold(tileId, threshold));
 	}
 
 	// must be implemented outside

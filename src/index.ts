@@ -7,3 +7,4 @@ import * as view from './view'
 serviceWorker.onnewtiles = (newTiles: TileModel[]) => newTiles.forEach((tile: TileModel) => view.addTile(tile));
 serviceWorker.onremovetile = (tileId: number) => view.removeTile(tileId);
 serviceWorker.onupdatetile = (newTile: TileModel, oldTile: TileModel) => view.updateTile(newTile, oldTile);
+serviceWorker.subscribeStore();
