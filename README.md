@@ -8,7 +8,7 @@ The program is writen TypeScript using ES6 Module System, built with Webpack, an
 ## Download source
 Open a terminal or command line and run following commands:
 ```shell
-$ git clone https://github.com/jscriptcoder/redux-redux.git
+$ git clone https://github.com/jscriptcoder/redux-worker.git
 $ cd redux-worker
 ```
 
