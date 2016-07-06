@@ -84,11 +84,11 @@
 	                    var howMany = newState.length - oldState.length;
 	                    var sliceIdx = newState.length - howMany;
 	                    var newTiles = newState.slice(sliceIdx);
-	                    postMessage(messages_1.newTilesMsg(newTiles), null);
+	                    postMessage(messages_1.newTilesMsg(newTiles));
 	                }
 	                else if (store_1.appStore.isItemDeleted()) {
 	                    var oldTile = oldState.find(function (tile) { return newState.indexOf(tile) === -1; });
-	                    postMessage(messages_1.removeTileMsg(oldTile.id), null);
+	                    postMessage(messages_1.removeTileMsg(oldTile.id));
 	                }
 	                else {
 	                    var oldTile_1;
@@ -96,7 +96,7 @@
 	                        oldTile_1 = oldState[index];
 	                        return tile !== oldTile_1;
 	                    });
-	                    postMessage(messages_1.updateTileMsg(newTile, oldTile_1), null);
+	                    postMessage(messages_1.updateTileMsg(newTile, oldTile_1));
 	                }
 	            }
 	        });
