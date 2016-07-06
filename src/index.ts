@@ -1,3 +1,4 @@
+import 'es6-shim'
 import './index.scss'
 import serviceWorker from './worker/service';
 import { MessageWorker } from './worker/messages';

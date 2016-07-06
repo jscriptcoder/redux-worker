@@ -1,3 +1,4 @@
+import 'es6-shim'
 import { appStore, TilesGridState } from '../store'
 import { serviceAmount } from '../backend'
 import { TileModel, tileId2Subscription } from '../models/tile'
@@ -16,6 +17,9 @@ import {
 	addTiles, 
 	removeTile,
 	updateTileThreshold } from '../actions'
+
+// crap I need to do so postMessage isn't mistaken for window.postMessage
+declare function postMessage(data: any): void;
 
 class StressedWorker {
 
@@ -58,12 +62,12 @@ class StressedWorker {
 					const sliceIdx = newState.length - howMany;
 					const newTiles = newState.slice(sliceIdx);
 
-					postMessage(newTilesMsg(newTiles), null);
+					postMessage(newTilesMsg(newTiles));
 
 				} else if (appStore.isItemDeleted()) {
 
 					const oldTile = oldState.find((tile: TileModel) => newState.indexOf(tile) === -1);
-					postMessage(removeTileMsg(oldTile.id), null);
+					postMessage(removeTileMsg(oldTile.id));
 
 				} else {
 
@@ -73,7 +77,7 @@ class StressedWorker {
 						return tile !== oldTile;
 					});
 
-					postMessage(updateTileMsg(newTile, oldTile), null);
+					postMessage(updateTileMsg(newTile, oldTile));
 				}
 			}
 		});

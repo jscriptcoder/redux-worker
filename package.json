@@ -5,7 +5,9 @@
   "main": "src/index.ts",
   "scripts": {
     "postinstall": "typings install",
-    "build": "webpack"
+    "build": "webpack",
+    "start": "live-server",
+    "prestart": "npm run build"
   },
   "repository": {
     "type": "git",
