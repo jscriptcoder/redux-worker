@@ -1,7 +1,6 @@
 import 'es6-shim'
 import './index.scss'
 import serviceWorker from './worker/service';
-import { MessageWorker } from './worker/messages';
 import { TileModel } from './models/tile'
 import * as view from './view'
 
