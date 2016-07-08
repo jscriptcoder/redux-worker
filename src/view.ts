@@ -1,8 +1,6 @@
-import { appStore } from './store'
-import serviceWorker from './worker/service';
-import { TileModel, tileId2Subscription } from './models/tile'
-import * as actions from './actions'
+import serviceWorker from './worker/service'
 import TilesGrid from './components/tiles-grid'
+import { TileModel } from './models/tile'
 
 const tilesGrid = new TilesGrid(document.getElementById('tiles-grid'));
 
