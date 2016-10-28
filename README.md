@@ -3,7 +3,7 @@ My third attempt to implement a redux application. Using [stressing-redux](https
 
 The program is writen TypeScript using ES6 Module System, built with Webpack, and has RxJS and Redux as main dependencies.
 
-[Click here for demo](https://toast-scale.codio.io/)
+[Click here for demo](https://jscriptcoder.github.io/redux-worker/)
 
 ## Download source
 Open a terminal or command line and run following commands:
