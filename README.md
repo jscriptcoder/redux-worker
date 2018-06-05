@@ -12,7 +12,7 @@ $ git clone https://github.com/jscriptcoder/redux-worker.git
 $ cd redux-worker
 ```
 
-##Installing and running
+## Installing and running
 ```shell
 $ npm install
 $ npm run start
